@@ -72,12 +72,5 @@ public class ChromeOpen {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sec.android.app.sbrowser:id/copy_button"))).click();
         Authentication(browse);
 
-
-
-           /* wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                    "//div[@data-test-id=\"homedeliverysn2021@gmail.com\"]"))).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                    "//input[@type=\"submit\"]"))).click();*/
-
     }
 }

@@ -60,31 +60,6 @@ public class HDAppiumTests {
                 "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.TextView"))).getText();
         System.out.println("Load Truck header : "+loadTruckLabel);
         Assert.assertTrue(loadTruckLabel.equals("Load Truck"));
-        /*wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/" +
-                        "android.widget.FrameLayout/android.widget.LinearLayout/android.widget." +
-                        "FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view." +
-                        "ViewGroup/android.view.ViewGroup/android.widget.LinearLayout" +
-                        "/android.widget.FrameLayout[2]/android.widget.LinearLayout" +
-                        "/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[1]" +
-                        "/android.widget.FrameLayout/android.widget.TextView"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/dm_download_btn"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "(//android.widget.ImageView[@content-desc=\"Arrow\"])[1]"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "(//android.widget.ImageView[@content-desc=\"Info\"])[1]"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/popup_element")));
-        MobileElement infoDialougeElement = driver.findElementById(packageName + ":id/popup_element");
-        Assert.assertTrue(infoDialougeElement.isDisplayed());
-        boxSearchOrderNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/info_order"))).getText();
-
-        boxSearchSKU = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                        packageName + ":id/info_sku"))).getText();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/info_ok_btn"))).click(); */
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/img_back"))).click();
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -110,16 +85,6 @@ public class HDAppiumTests {
                 "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.TextView"))).getText();
         System.out.println("Box Search header : "+boxSearchLabel);
         Assert.assertTrue(boxSearchLabel.equals("Box Search"));
-        /*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/problem_reading_barcode"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/pw_input_orderNum"))).sendKeys(boxSearchOrderNumber);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/pw_input_skuNum"))).sendKeys(boxSearchSKU);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/btn_theiaverify"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/info_ok_btn"))).click();*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/img_back"))).click();
         //TODO - PUT IN WHAT YOU ARE TRYING TO VALIDATE HERE
@@ -139,12 +104,6 @@ public class HDAppiumTests {
         String headerText = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.TextView").getText();
         System.out.println("All market QRcode header : "+headerText);
         Assert.assertTrue(headerText.equals("All Market Returns QR Codes"));
-        /*MobileElement qrCode = driver.findElementByXPath("(//android.widget.ImageView[@content-desc=\"Scan QR code\"])[1]");
-        Assert.assertTrue(qrCode.isDisplayed());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "(//android.widget.ImageView[@content-desc=\"Scan QR code\"])[1]"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/dismiss_qr_code"))).click();*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/img_back"))).click();
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -163,13 +122,6 @@ public class HDAppiumTests {
                 "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.TextView"))).getText();
         System.out.println("History header : "+historyLabel);
         Assert.assertTrue(historyLabel.equals("History"));
-        /*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/tutorial_btn"))).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        MobileElement historyFAQ = driver.findElementById(packageName + ":id/popup_element");
-        Assert.assertTrue(historyFAQ.isDisplayed());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/faq_ok_btn"))).click();*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/action_home"))).click();
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -190,28 +142,6 @@ public class HDAppiumTests {
                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.TextView"))).getText();
         System.out.println("Report Damage header : "+reportDmgLabel);
         Assert.assertTrue(reportDmgLabel.equals("Report Damage"));
-
-        /*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/problem_reading_barcode"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/pw_input_orderNum"))).sendKeys(Order);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/pw_input_skuNum"))).sendKeys(SKU);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/btn_theiaverify"))).click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/info_yes_btn"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/imgCapture"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/accept_img"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/submit_images"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/rd_observation_txt"))).sendKeys(ReportDMG);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/rd_email_btn"))).click();*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/action_home"))).click();
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -234,10 +164,6 @@ public class HDAppiumTests {
         String returnHeader=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup[1]/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.TextView[1]"))).getText();
         System.out.println("Returns header : "+returnHeader);
         Assert.assertTrue(returnHeader.equals("Returns"));
-       /* String rqHeader=driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[1]").getText();
-        Assert.assertTrue(rqHeader.equals("Return Queue"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/return_queue_close_drawer_button"))).click();*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/img_back"))).click();
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(

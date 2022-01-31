@@ -36,22 +36,6 @@ public class OneAuth
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 "com.android.packageinstaller:id/permission_allow_button"))).click();
         Thread.sleep(5000);
-
-        /*wait.until(ExpectedConditions.visibilityOf(driver.findElementById(
-                "com.sec.android.app.sbrowser:id/option_menu"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[4]/android.widget.RelativeLayout/android.widget.TextView"))).click();
-        Thread.sleep(5000);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sec.android.app.sbrowser:id/location_bar_edit_text")));
-        element.click();
-        String browse= element.getText();
-        System.out.println(browse);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.sec.android.app.sbrowser:id/copy_button"))).click();
-        caps.setCapability(CapabilityType.BROWSER_NAME, "Chrome");
-        caps.setCapability("platformVersion", "9.0.0");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\rahul.dash\\OneDrive - Mahindra & Mahindra Ltd.-55241918-Bristlecone India Pvt Ltd\\Documents\\chromedriver");
-        driver.get(browse);
-        Thread.sleep(5000);*/
         Set<String> contextNames = driver.getContextHandles();
         for (String contextName:contextNames)
         {

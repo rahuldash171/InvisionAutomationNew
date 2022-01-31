@@ -42,8 +42,8 @@ public class HDAppiumTests {
     }
 
     @Test
-    public void logIntoAppAsHomeDeliveryTech() throws InterruptedException {
-        commonTests.signIntoINVision(wait, driver, "DEN");
+    public void logIntoAppAsHomeDeliveryTech() throws InterruptedException, MalformedURLException {
+        commonTests.signIntoINVision(wait, driver, "MSP");
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_delivery_persona_label"))).getText();
         Assert.assertTrue(hdLabel.equals("Home Delivery"));
@@ -51,7 +51,7 @@ public class HDAppiumTests {
     }
 
     @Test (priority = 1)
-    public void loadTruck() throws InterruptedException {
+    public void loadTruck() throws InterruptedException, MalformedURLException {
         if(!invisionLoaded)
             commonTests.signIntoINVision(wait, driver, "DEN");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -93,8 +93,8 @@ public class HDAppiumTests {
         Assert.assertTrue(hdLabel.equals("Home Delivery"));
     }
 
-    @Test(priority = 2,enabled=false)
-    public void boxSearch() throws InterruptedException {
+    @Test(priority = 2)
+    public void boxSearch() throws InterruptedException, MalformedURLException {
         //String RTIDToUseForReturn = commonTests.getGeneratedRTID();
         //boxSearchOrderNumber = CommonTests.orderNumberForReturns;
         //boxSearchSKU = CommonTests.skusForReturns[0];
@@ -107,7 +107,7 @@ public class HDAppiumTests {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_box_search_img"))).click();
         String boxSearchLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.TextView"))).getText();
+                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.TextView"))).getText();
         System.out.println("Box Search header : "+boxSearchLabel);
         Assert.assertTrue(boxSearchLabel.equals("Box Search"));
         /*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -121,16 +121,16 @@ public class HDAppiumTests {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/info_ok_btn"))).click();*/
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/action_home"))).click();
+                packageName + ":id/img_back"))).click();
         //TODO - PUT IN WHAT YOU ARE TRYING TO VALIDATE HERE
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/img_back"))).getText();
+                packageName + ":id/home_delivery_persona_label"))).getText();
         //TODO - actually get this test to work
         Assert.assertTrue(hdLabel.equals("Home Delivery"));
     }
 
     @Test(priority = 3)
-    public void allMarketQrcode() throws InterruptedException {
+    public void allMarketQrcode() throws InterruptedException, MalformedURLException {
         if(!invisionLoaded)
             commonTests.signIntoINVision(wait, driver, "DEN");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
@@ -154,7 +154,7 @@ public class HDAppiumTests {
     }
 
     @Test(priority = 4)
-    public void history() throws InterruptedException {
+    public void history() throws InterruptedException, MalformedURLException {
         if(!invisionLoaded)
             commonTests.signIntoINVision(wait, driver, "DEN");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -179,7 +179,7 @@ public class HDAppiumTests {
     }
 
    @Test(priority = 7)
-    public void reportDamage() throws InterruptedException {
+    public void reportDamage() throws InterruptedException, MalformedURLException {
        if(!invisionLoaded)
            commonTests.signIntoINVision(wait, driver, "DEN");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -221,7 +221,7 @@ public class HDAppiumTests {
     }
 
     @Test(priority = 8)
-    public void returnsModule() throws InterruptedException {
+    public void returnsModule() throws InterruptedException, MalformedURLException {
         if(!invisionLoaded)
             commonTests.signIntoINVision(wait, driver, "DEN");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -248,7 +248,7 @@ public class HDAppiumTests {
     }
 
     @Test(priority = 6)
-    public void marketDashboard() throws InterruptedException {
+    public void marketDashboard() throws InterruptedException, MalformedURLException {
         if(!invisionLoaded)
             commonTests.signIntoINVision(wait, driver, "DEN");
         driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
@@ -256,19 +256,22 @@ public class HDAppiumTests {
                 packageName + ":id/home_leadership_view_img"))).click();
         String dateToday= driver.findElementById(packageName + ":id/dm_date_txt").getText();
         String marketHeader= driver.findElementById(packageName + ":id/box_search_header_txt").getText();
+        System.out.println("Market Dashboard Market header : "+marketHeader);
         Assert.assertTrue(marketHeader.equals("Market"));
-        //Assert.assertTrue(dateToday.equals());
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/route_txt_btn"))).click();
         String routeHeader= driver.findElementById(packageName + ":id/box_search_header_txt").getText();
+        System.out.println("Market Dashboard Route header : "+routeHeader);
         Assert.assertTrue(routeHeader.equals("Route"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/box_txt_btn"))).click();
         String boxHeader= driver.findElementById(packageName + ":id/box_search_header_txt").getText();
+        System.out.println("Market Dashboard Box header : "+boxHeader);
         Assert.assertTrue(boxHeader.equals("Box"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/user_txt_btn"))).click();
         String userHeader= driver.findElementById(packageName + ":id/box_search_header_txt").getText();
+        System.out.println("Market Dashboard User header : "+userHeader);
         Assert.assertTrue(userHeader.equals("User"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/action_home"))).click();
@@ -280,7 +283,7 @@ public class HDAppiumTests {
     }
 
     @Test(priority = 5)
-    public void loadtruckException() throws InterruptedException {
+    public void loadtruckException() throws InterruptedException, MalformedURLException {
         if(!invisionLoaded)
             commonTests.signIntoINVision(wait, driver, "DEN");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -301,7 +304,7 @@ public class HDAppiumTests {
     }
 
     @Test(priority = 9)
-    public void logOut() throws InterruptedException {
+    public void logOut() throws InterruptedException, MalformedURLException {
         if(!invisionLoaded)
             commonTests.signIntoINVision(wait, driver, "DEN");
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);

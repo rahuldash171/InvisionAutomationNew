@@ -44,13 +44,14 @@ public class CommonTests {
         {
             System.out.println(contextName);
         }
+        Thread.sleep(5000);
         driver.context("WEBVIEW_chrome");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                 "//div[@data-test-id=\"homedeliverysn2021@gmail.com\"]"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                 "//input[@type=\"submit\"]"))).click();
         System.out.println("MS Auth Successful!");
-        Thread.sleep(5000);
+        Thread.sleep(6000);
         driver.context("NATIVE_APP");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(

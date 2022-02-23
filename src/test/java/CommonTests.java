@@ -28,7 +28,6 @@ public class CommonTests {
     //declare needed variables
     public static final String orderNumberForReturns = "95012058520";
     public static String[] skusForReturns = {"122601", "123673", "125374"};
-
     public void signIntoINVision(WebDriverWait wait, AndroidDriver driver, String marketLocation) throws InterruptedException, MalformedURLException {
         wait.until(ExpectedConditions.visibilityOf(driver.findElementById(
                 packageName+":id/btn_skip"))).click();
@@ -59,6 +58,42 @@ public class CommonTests {
         driver.findElementById(packageName+":id/input_locationName").sendKeys(marketLocation);
         driver.findElementById(packageName+":id/input_userID").sendKeys("abcde");
         driver.findElementById(packageName+":id/proceed_btn").click();
+    }
+
+    public void signIntoINVisionS21(WebDriverWait wait, AndroidDriver driver, String marketLocation) throws InterruptedException, MalformedURLException {
+        wait.until(ExpectedConditions.visibilityOf(driver.findElementById(
+                packageName+":id/btn_skip"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                "com.android.permissioncontroller:id/permission_allow_foreground_only_button"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                "com.android.permissioncontroller:id/permission_allow_foreground_only_button"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                "com.android.permissioncontroller:id/permission_allow_button"))).click();
+        Thread.sleep(5000);
+        Set<String> contextNames = driver.getContextHandles();
+        for (String contextName:contextNames)
+        {
+            System.out.println(contextName);
+        }
+        Thread.sleep(5000);
+        driver.context("WEBVIEW_chrome");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//div[@data-test-id=\"keyholdersn2021@gmail.com\"]"))).click();
+        //String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@type=\"submit\"]"))).getText();
+        //System.out.println(text);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//input[@type=\"submit\"]"))).click();
+        System.out.println("MS Auth Successful!");
+        Thread.sleep(5000);
+        driver.context("NATIVE_APP");
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                packageName+":id/input_locationName")));
+        driver.findElementById(packageName+":id/input_locationName").sendKeys(marketLocation);
+        driver.findElementById(packageName+":id/input_userID").sendKeys("abcde");
+        driver.findElementById(packageName+":id/proceed_btn").click();
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+          //      packageName+":id/tv_header_title")));
     }
 
     public String getGeneratedRTID() {

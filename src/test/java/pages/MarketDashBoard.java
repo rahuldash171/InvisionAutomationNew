@@ -14,22 +14,22 @@ public class MarketDashBoard {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_leadership_view_img"))).click();
         String dateToday= driver.findElementById(packageName + ":id/dm_date_txt").getText();
-        String marketHeader= driver.findElementById(packageName + ":id/box_search_header_txt").getText();
+        String marketHeader= wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(packageName + ":id/box_search_header_txt"))).getText();
         System.out.println("Market Dashboard Market header : "+marketHeader);
         Assert.assertTrue(marketHeader.equals("Market"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/route_txt_btn"))).click();
-        String routeHeader= driver.findElementById(packageName + ":id/box_search_header_txt").getText();
+        String routeHeader= wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(packageName + ":id/box_search_header_txt"))).getText();
         System.out.println("Market Dashboard Route header : "+routeHeader);
         Assert.assertTrue(routeHeader.equals("Route"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/box_txt_btn"))).click();
-        String boxHeader= driver.findElementById(packageName + ":id/box_search_header_txt").getText();
+        String boxHeader=wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(packageName + ":id/box_search_header_txt"))).getText();
         System.out.println("Market Dashboard Box header : "+boxHeader);
         Assert.assertTrue(boxHeader.equals("Box"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/user_txt_btn"))).click();
-        String userHeader= driver.findElementById(packageName + ":id/box_search_header_txt").getText();
+        String userHeader= wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(packageName + ":id/box_search_header_txt"))).getText();
         System.out.println("Market Dashboard User header : "+userHeader);
         Assert.assertTrue(userHeader.equals("User"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(

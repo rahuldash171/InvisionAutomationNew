@@ -11,11 +11,12 @@ public class History {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_history_img"))).click();
         String historyLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.TextView"))).getText();
+                "\t\n" +
+                        "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.TextView"))).getText();
         System.out.println("History header : "+historyLabel);
         Assert.assertTrue(historyLabel.equals("History"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/action_home"))).click();
+                packageName + ":id/img_back"))).click();
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_delivery_persona_label"))).getText();
         //TODO - actually get this test to work

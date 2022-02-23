@@ -13,7 +13,7 @@ public class BoxSearchWH {
      */
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver , String packageName) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                "com.sleepnumber.invision.dev:id/box_search_btn"))).click();
+                packageName+":id/box_search_btn"))).click();
         String boxSearchLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                 "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.TextView"))).getText();
         System.out.println("Box Search header : "+boxSearchLabel);
@@ -22,7 +22,7 @@ public class BoxSearchWH {
                 packageName + ":id/img_back"))).click();
         //TODO - PUT IN WHAT YOU ARE TRYING TO VALIDATE HERE
         String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                "com.sleepnumber.invision.dev:id/warehouse_persona_label"))).getText();
+                packageName+":id/warehouse_persona_label"))).getText();
         Assert.assertTrue(whLabel.equals("Warehousing"));
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Sanity HD Test Suite" parallel="false" thread-count="1">
+    <test verbose="2" preserve-order="true" name="HomeDelivery">
+        <classes>
+                <class name="HDAppiumTests"/>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="WareHousing" >
+        <classes>
+            <class name="WarehouseAppiumTests"/>
+        </classes>
+    </test>
+</suite>

@@ -1,3 +1,4 @@
 package WH_Pages;public class InboundReceiptException {
-@author - Rahul Dash
-}
+/*
+    @author : Rahul Dash
+     */}

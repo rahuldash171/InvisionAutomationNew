@@ -22,13 +22,13 @@ public class WarehouseAppiumTests {
     @BeforeTest
     public void setup() throws MalformedURLException, InterruptedException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "ce011821cbf838ec0c");
+        caps.setCapability("deviceName", "SM-G996U1");
         caps.setCapability("platformName", "Android");
-        caps.setCapability("appPackage", "com.sleepnumber.invision.dev");
+        caps.setCapability("appPackage", "com.sleepnumber.invision.stage");
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
         driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         wait = new WebDriverWait(driver, 30);
-        new CommonTests().signIntoINVision(wait, driver, "SJC");
+        //new CommonTests().signIntoINVision(wait, driver, "SJC");
     }
 
     @Test(priority = 0)

@@ -1,3 +1,7 @@
-package pages;public class FeedBack {
-@author - Rahul Dash
+package pages;
+
+public class FeedBack {
+/*
+    @author : Rahul Dash
+     */
 }

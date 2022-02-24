@@ -1,14 +1,13 @@
-package pages;
+package HD_Pages;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
 import java.util.concurrent.TimeUnit;
 
-public class FeedBack {
+public class Feedback {
     /*@author -
     Rahul Dash*/
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver , String packageName) {

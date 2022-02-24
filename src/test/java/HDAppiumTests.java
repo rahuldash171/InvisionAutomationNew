@@ -1,7 +1,5 @@
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.MobileBrowserType;
-import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,9 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.*;
-
-import javax.swing.*;
+import HD_Pages.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -21,15 +17,14 @@ public class HDAppiumTests {
 
     //declare needed constants
     private final String packageName = "com.sleepnumber.invision.stage";
-
-    //declare needed variables
     public AndroidDriver<MobileElement> driver;
     public WebDriverWait wait;
     public CommonTests commonTests;
     private String boxSearchOrderNumber, boxSearchSKU;
     private boolean invisionLoaded;
+    private String hdPersona = "homedeliverysn2021@gmail.com";
 
-    //launch emulator with desired capabilities
+    //Launch emulator with desired capabilities
     @BeforeTest
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
@@ -42,9 +37,22 @@ public class HDAppiumTests {
         wait = new WebDriverWait(driver, 500);
     }
 
-    @Test
+    /**
+     * Logging into Home Delivery persona and checking Persona label
+     */
+    @Test(priority = 0)
     public void logIntoAppAsHomeDeliveryTech() throws InterruptedException, MalformedURLException {
-        commonTests.signIntoINVision(wait, driver, "MSP");
+        commonTests.signIntoINVisionS21(wait, driver, "DEN",hdPersona);
+        /*
+         *Below code will work only if there are any delayed routes for the day
+         */
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                packageName + ":id/popup_element")));
+        Boolean popUp = driver.findElementById(packageName + ":id/popup_element").isDisplayed();
+        if(popUp)
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                    packageName + ":id/btn_back"))).click();
+
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_delivery_persona_label"))).getText();
         Assert.assertTrue(hdLabel.equals("Home Delivery"));
@@ -52,33 +60,19 @@ public class HDAppiumTests {
     }
 
     @Test(priority = 1)
-    public void HDSanity() throws InterruptedException, MalformedURLException {
+    public void HDSanity() {
 
         new LoadTruck().ClickNBack(wait, driver ,packageName);
         new BoxSearch().ClickNBack(wait, driver, packageName);
-        new AllMarketQR().ClickNBack(wait, driver, packageName);
-        new History().ClickNBack(wait, driver, packageName);
-        new LTException().ClickNBack(wait, driver, packageName);
-        new MarketDashBoard().ClickNBack(wait, driver, packageName);
-        new ReportDmg().ClickNBack(wait, driver, packageName);
         new Returns().ClickNBack(wait, driver, packageName);
-
-
-
-        /*if(!invisionLoaded)
-            commonTests.signIntoINVision(wait, driver, "DEN");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/home_load_truck_img"))).click();
-        String loadTruckLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.TextView"))).getText();
-        System.out.println("Load Truck header : "+loadTruckLabel);
-        Assert.assertTrue(loadTruckLabel.equals("Load Truck"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/img_back"))).click();
-        String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/home_delivery_persona_label"))).getText();
-        //TODO - actually get this test to work
-        Assert.assertTrue(hdLabel.equals("Home Delivery"));*/
+        new AllMarketQR().ClickNBack(wait, driver, packageName);
+        new ReportDamage().ClickNBack(wait, driver, packageName);
+        new ReportWrong().ClickNBack(wait, driver, packageName);
+        new ReportMissing().ClickNBack(wait, driver, packageName);
+        new History().ClickNBack(wait, driver, packageName);
+        new MarketDashBoard().ClickNBack(wait, driver, packageName);
+        new LTException().ClickNBack(wait, driver, packageName);
+        new Feedback().ClickNBack(wait, driver, packageName);
     }
 
     @Test(priority = 2,enabled = false)
@@ -91,13 +85,16 @@ public class HDAppiumTests {
         if(boxSearchSKU == null)
             boxSearchSKU = JOptionPane.showInputDialog("ENTER SKU");*/
         if (!invisionLoaded)
-            commonTests.signIntoINVision(wait, driver, "DEN");
+            commonTests.signIntoINVisionS21(wait, driver, "DEN", hdPersona);
     }
 
+    /**
+     * Logging out of app
+     */
     @AfterTest
     public void logOut() throws InterruptedException, MalformedURLException {
         if (!invisionLoaded)
-            commonTests.signIntoINVision(wait, driver, "DEN");
+            commonTests.signIntoINVisionS21(wait, driver, "DEN",hdPersona);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/action_home"))).click();
@@ -105,6 +102,5 @@ public class HDAppiumTests {
         Assert.assertTrue(logoutText.equals("SIGN OUT?"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/btn_yes"))).click();
-
     }
 }

@@ -1,16 +1,16 @@
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Set;
+
+//TODO - No Use of this class, check and remove
+
 @Test
 public class OneAuth
 {

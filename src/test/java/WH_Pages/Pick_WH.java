@@ -5,22 +5,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
 import java.util.concurrent.TimeUnit;
 
-public class ReportDamage {
+public class Pick_WH {
     /*
         @author : Rahul Dash
          */
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver , String packageName) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName+":id/report_damage_btn"))).click();
+                packageName+":id/pickbtn"))).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        String reportDmgLabel= wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(packageName+":id/header"))).getText();
-        System.out.println("Report Damage header : " + reportDmgLabel);
-        Assert.assertTrue(reportDmgLabel.equals("Report Damage"));
+        String pickHead= driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.TextView").getText();
+        System.out.println("Pick header : " + pickHead);
+        Assert.assertTrue(pickHead.equals("Pick for Recovery"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName+":id/action_home"))).click();
+                packageName+":id/img_back"))).click();
         String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/warehouse_persona_label"))).getText();
         Assert.assertTrue(whLabel.equals("Warehousing"));

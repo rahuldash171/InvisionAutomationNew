@@ -9,25 +9,25 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.*;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class KHAppiumTests {
+    /*
+    @author : Nikita Gopathi
+     */
 
     //declare needed constants
     private final String packageName = "com.sleepnumber.invision.stage";
-
-    //declare needed variables
     public AndroidDriver<MobileElement> driver;
     public WebDriverWait wait;
     public CommonTests commonTests;
     private String boxSearchOrderNumber, boxSearchSKU;
     private boolean invisionLoaded;
+    private String khPersona = "keyholdersn2021@gmail.com";
 
-    //launch emulator with desired capabilities
+    //Launch emulator with desired capabilities
     @BeforeTest
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
@@ -40,13 +40,15 @@ public class KHAppiumTests {
         wait = new WebDriverWait(driver, 300);
     }
 
-    @Test
+    /**
+     * Logging into Key Holder persona and checking Persona label
+     */
+    @Test(priority = 0)
     public void logIntoAppAsKHTech() throws InterruptedException, MalformedURLException {
-        commonTests.signIntoINVisionS21(wait, driver, "PVD");
+        commonTests.signIntoINVisionS21(wait, driver, "PVD", khPersona);
         String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_persona_label"))).getText();
         Assert.assertTrue(khLabel.equals("Keyholder"));
-        //System.out.println("On KH home page");
         invisionLoaded = true;
     }
 
@@ -64,13 +66,16 @@ public class KHAppiumTests {
         new LoadTruckException_KH().ClickNBack(wait, driver, packageName);
         new MarketDashboard_KH().ClickNBack(wait, driver, packageName);
         //new AllMarketReturnsQRCodes_KH().ClickNBack(wait, driver, packageName);
-
+        new Feedback_KH().ClickNBack(wait, driver, packageName);
     }
 
+    /**
+     * Logging out of app
+     */
     @AfterTest
     public void logOut() throws InterruptedException, MalformedURLException {
         if (!invisionLoaded)
-            commonTests.signIntoINVisionS21(wait, driver, "PVD");
+            commonTests.signIntoINVisionS21(wait, driver, "PVD", khPersona);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/action_home"))).click();

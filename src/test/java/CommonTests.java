@@ -16,7 +16,7 @@ public class CommonTests {
     public static final String orderNumberForReturns = "95012058520";
     public static String[] skusForReturns = {"122601", "123673", "125374"};
 
-    public void signIntoINVision(WebDriverWait wait, AndroidDriver driver, String marketLocation, String persona) throws InterruptedException, MalformedURLException {
+    public void signIntoINVision(WebDriverWait wait, AndroidDriver driver, String marketLocation, String persona,String user) throws InterruptedException, MalformedURLException {
         wait.until(ExpectedConditions.visibilityOf(driver.findElementById(
                 packageName+":id/btn_skip"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -44,11 +44,11 @@ public class CommonTests {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/input_locationName")));
         driver.findElementById(packageName+":id/input_locationName").sendKeys(marketLocation);
-        driver.findElementById(packageName+":id/input_userID").sendKeys("abcde");
+        driver.findElementById(packageName+":id/input_userID").sendKeys(user);
         driver.findElementById(packageName+":id/proceed_btn").click();
     }
 
-    public void signIntoINVisionS21(WebDriverWait wait, AndroidDriver driver, String marketLocation, String persona) throws InterruptedException, MalformedURLException {
+    public void signIntoINVisionS21(WebDriverWait wait, AndroidDriver driver, String marketLocation, String persona, String user) throws InterruptedException, MalformedURLException {
         wait.until(ExpectedConditions.visibilityOf(driver.findElementById(
                 packageName+":id/btn_skip"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -77,7 +77,7 @@ public class CommonTests {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/input_locationName")));
         driver.findElementById(packageName+":id/input_locationName").sendKeys(marketLocation);
-        driver.findElementById(packageName+":id/input_userID").sendKeys("abcde");
+        driver.findElementById(packageName+":id/input_userID").sendKeys(user);
         driver.findElementById(packageName+":id/proceed_btn").click();
         //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(packageName+":id/tv_header_title")));
     }

@@ -13,7 +13,7 @@ public class AllMarketReturnsQRCodes_KH {
      */
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver, String packageName) {
 
-        String scrollElement = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"All Market Returns QR Codes\").instance(0))";
+        String scrollElement = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"All Market Returns\").instance(0))";
         driver.findElementByAndroidUIAutomator(scrollElement).click();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 

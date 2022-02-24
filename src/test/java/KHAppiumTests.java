@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -26,13 +27,14 @@ public class KHAppiumTests {
     private String boxSearchOrderNumber, boxSearchSKU;
     private boolean invisionLoaded;
     private String khPersona = "keyholdersn2021@gmail.com";
+    private String khUser ="KHAutomationUser";
 
     //Launch emulator with desired capabilities
     @BeforeTest
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "SM-G996U1");
+        caps.setCapability("deviceName", "ce011821cbf838ec0c");
         caps.setCapability("platformName", "Android");
         caps.setCapability("appPackage", packageName);
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
@@ -45,7 +47,7 @@ public class KHAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsKHTech() throws InterruptedException, MalformedURLException {
-        commonTests.signIntoINVisionS21(wait, driver, "PVD", khPersona);
+        commonTests.signIntoINVision(wait, driver, "PVD", khPersona,khUser);
         String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_persona_label"))).getText();
         Assert.assertTrue(khLabel.equals("Keyholder"));
@@ -65,7 +67,7 @@ public class KHAppiumTests {
         new History_KH().ClickNBack(wait, driver, packageName);
         new LoadTruckException_KH().ClickNBack(wait, driver, packageName);
         new MarketDashboard_KH().ClickNBack(wait, driver, packageName);
-        //new AllMarketReturnsQRCodes_KH().ClickNBack(wait, driver, packageName);
+       // new AllMarketReturnsQRCodes_KH().ClickNBack(wait, driver, packageName);
         new Feedback_KH().ClickNBack(wait, driver, packageName);
     }
 
@@ -75,11 +77,12 @@ public class KHAppiumTests {
     @AfterTest
     public void logOut() throws InterruptedException, MalformedURLException {
         if (!invisionLoaded)
-            commonTests.signIntoINVisionS21(wait, driver, "PVD", khPersona);
+            commonTests.signIntoINVision(wait, driver, "PVD", khPersona,khUser);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/action_home"))).click();
         String logoutText = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView").getText();
+        System.out.println(logoutText);
         Assert.assertTrue(logoutText.equals("SIGN OUT?"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/btn_yes"))).click();

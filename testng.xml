@@ -6,9 +6,14 @@
                 <class name="HDAppiumTests"/>
         </classes>
     </test>
-    <test verbose="2" preserve-order="true" name="WareHousing" >
+    <test verbose="2" preserve-order="true" name="WareHousing">
         <classes>
-            <class name="WarehouseAppiumTests"/>
+            <class name="WHAppiumTests"/>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="KeyHolder">
+        <classes>
+            <class name="KHAppiumTests"/>
         </classes>
     </test>
 </suite>

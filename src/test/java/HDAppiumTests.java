@@ -23,13 +23,14 @@ public class HDAppiumTests {
     private String boxSearchOrderNumber, boxSearchSKU;
     private boolean invisionLoaded;
     private String hdPersona = "homedeliverysn2021@gmail.com";
+    private String hdUser ="HDAutomationUser";
 
     //Launch emulator with desired capabilities
     @BeforeTest
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "SM-G996U1");
+        caps.setCapability("deviceName", "ce011821cbf838ec0c");
         caps.setCapability("platformName", "Android");
         caps.setCapability("appPackage", packageName);
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
@@ -42,16 +43,22 @@ public class HDAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsHomeDeliveryTech() throws InterruptedException, MalformedURLException {
-        commonTests.signIntoINVisionS21(wait, driver, "DEN",hdPersona);
-        /*
-         *Below code will work only if there are any delayed routes for the day
-         */
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/popup_element")));
-        Boolean popUp = driver.findElementById(packageName + ":id/popup_element").isDisplayed();
-        if(popUp)
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                    packageName + ":id/btn_back"))).click();
+        commonTests.signIntoINVision(wait, driver, "DEN",hdPersona,hdUser);
+        /* ---Delay Routes popup code --*/
+            try
+            {
+                driver.findElementById(packageName + ":id/popup_element").isDisplayed();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                        packageName + ":id/btn_back"))).click();
+            }   // try
+            catch (Exception e)
+            {
+                System.out.println("No Routes available");
+            }   // catch
+
+
+
+
 
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_delivery_persona_label"))).getText();
@@ -75,30 +82,17 @@ public class HDAppiumTests {
         new Feedback().ClickNBack(wait, driver, packageName);
     }
 
-    @Test(priority = 2,enabled = false)
-    public void boxSearch() throws InterruptedException, MalformedURLException {
-        //String RTIDToUseForReturn = commonTests.getGeneratedRTID();
-        //boxSearchOrderNumber = CommonTests.orderNumberForReturns;
-        //boxSearchSKU = CommonTests.skusForReturns[0];
-       /* if(boxSearchOrderNumber == null)
-            boxSearchOrderNumber = JOptionPane.showInputDialog("ENTER ORDER NUMBER");
-        if(boxSearchSKU == null)
-            boxSearchSKU = JOptionPane.showInputDialog("ENTER SKU");*/
-        if (!invisionLoaded)
-            commonTests.signIntoINVisionS21(wait, driver, "DEN", hdPersona);
-    }
-
     /**
      * Logging out of app
      */
     @AfterTest
     public void logOut() throws InterruptedException, MalformedURLException {
-        if (!invisionLoaded)
-            commonTests.signIntoINVisionS21(wait, driver, "DEN",hdPersona);
+
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/action_home"))).click();
         String logoutText = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView").getText();
+        System.out.println("Logout successful:"+ logoutText);
         Assert.assertTrue(logoutText.equals("SIGN OUT?"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/btn_yes"))).click();

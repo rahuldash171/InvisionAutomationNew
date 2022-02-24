@@ -21,13 +21,14 @@ public class WHAppiumTests {
     private String orderNumb,skuNumb;
     private boolean invisionLoaded;
     private String whPersona = "warehouseddcsn2021@gmail.com";
+    private String whUser ="WHAutomationUser";
 
     //Launch emulator with desired capabilities
     @BeforeTest
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "SM-G996U1");
+        caps.setCapability("deviceName", "ce011821cbf838ec0c");
         caps.setCapability("platformName", "Android");
         caps.setCapability("appPackage", packageName);
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
@@ -40,7 +41,7 @@ public class WHAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsWarehouseTech() throws InterruptedException, MalformedURLException{
-        commonTests.signIntoINVisionS21(wait,driver,"SJC",whPersona);
+        commonTests.signIntoINVision(wait,driver,"SJC",whPersona,whUser);
         String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/warehouse_persona_label"))).getText();
         Assert.assertTrue(whLabel.equals("Warehousing"));
@@ -49,18 +50,18 @@ public class WHAppiumTests {
 
     @Test(priority = 1)
     public void WHSanity() throws InterruptedException, MalformedURLException {
-        Thread.sleep(5000);
-        new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
-        new BoxSearchWH().ClickNBack(wait, driver ,packageName);
-        new ReceiveHD_WH().ClickNBack(wait, driver ,packageName);
-        new ReturnToADC_WH().ClickNBack(wait, driver, packageName);
-        new InventoryCheck_WH().ClickNBack(wait, driver ,packageName);
-        new Pick_WH().ClickNBack(wait, driver, packageName);
-        new History_WH().ClickNBack(wait, driver, packageName);
-        new ReportDamage_WH().ClickNBack(wait, driver, packageName);
-        new InboundReceiptException_WH().ClickNBack(wait, driver, packageName);
-        new Tutorial_WH().ClickNBack(wait, driver, packageName);
-        //new InventoryAudit_WH().ClickNBack(wait, driver, packageName);
+
+//        new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
+//        new BoxSearch_WH().ClickNBack(wait, driver ,packageName);
+//        new ReceiveHD_WH().ClickNBack(wait, driver ,packageName);
+//        new ReturnToADC_WH().ClickNBack(wait, driver, packageName);
+//        new InventoryCheck_WH().ClickNBack(wait, driver ,packageName);
+//        new Pick_WH().ClickNBack(wait, driver, packageName);
+//        new History_WH().ClickNBack(wait, driver, packageName);
+//        new ReportDamage_WH().ClickNBack(wait, driver, packageName);
+//        new InboundReceiptException_WH().ClickNBack(wait, driver, packageName);
+//        new Tutorial_WH().ClickNBack(wait, driver, packageName);
+        new InventoryAudit_WH().ClickNBack(wait, driver, packageName);
         new FeedbackWH().ClickNBack(wait, driver, packageName);
     }
 
@@ -70,11 +71,12 @@ public class WHAppiumTests {
     @AfterTest
     public void logOut() throws InterruptedException, MalformedURLException{
         if (!invisionLoaded)
-            commonTests.signIntoINVisionS21(wait, driver, "SJC",whPersona);
+            commonTests.signIntoINVisionS21(wait, driver, "SJC",whPersona,whUser);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/action_home"))).click();
         String logoutText=driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView").getText();
+        System.out.println(logoutText);
         Assert.assertTrue(logoutText.equals("SIGN OUT?"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/btn_yes"))).click();

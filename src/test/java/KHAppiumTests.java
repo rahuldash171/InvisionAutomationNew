@@ -86,6 +86,7 @@ public class KHAppiumTests {
         Assert.assertTrue(logoutText.equals("SIGN OUT?"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/btn_yes"))).click();
+        driver.quit();
 
     }
 }

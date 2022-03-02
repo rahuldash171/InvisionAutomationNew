@@ -51,16 +51,16 @@ public class WHAppiumTests {
     @Test(priority = 1)
     public void WHSanity() throws InterruptedException, MalformedURLException {
 
-//        new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
-//        new BoxSearch_WH().ClickNBack(wait, driver ,packageName);
-//        new ReceiveHD_WH().ClickNBack(wait, driver ,packageName);
-//        new ReturnToADC_WH().ClickNBack(wait, driver, packageName);
-//        new InventoryCheck_WH().ClickNBack(wait, driver ,packageName);
-//        new Pick_WH().ClickNBack(wait, driver, packageName);
-//        new History_WH().ClickNBack(wait, driver, packageName);
-//        new ReportDamage_WH().ClickNBack(wait, driver, packageName);
-//        new InboundReceiptException_WH().ClickNBack(wait, driver, packageName);
-//        new Tutorial_WH().ClickNBack(wait, driver, packageName);
+        new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
+        new BoxSearch_WH().ClickNBack(wait, driver ,packageName);
+        new ReceiveHD_WH().ClickNBack(wait, driver ,packageName);
+        new ReturnToADC_WH().ClickNBack(wait, driver, packageName);
+        new InventoryCheck_WH().ClickNBack(wait, driver ,packageName);
+        new Pick_WH().ClickNBack(wait, driver, packageName);
+        new History_WH().ClickNBack(wait, driver, packageName);
+        new ReportDamage_WH().ClickNBack(wait, driver, packageName);
+        new InboundReceiptException_WH().ClickNBack(wait, driver, packageName);
+        new Tutorial_WH().ClickNBack(wait, driver, packageName);
         new InventoryAudit_WH().ClickNBack(wait, driver, packageName);
         new FeedbackWH().ClickNBack(wait, driver, packageName);
     }
@@ -77,8 +77,9 @@ public class WHAppiumTests {
                 packageName+":id/action_home"))).click();
         String logoutText=driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView").getText();
         System.out.println(logoutText);
-        Assert.assertTrue(logoutText.equals("SIGN OUT?"));
+        Assert.assertEquals(logoutText,"SIGN OUT?");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/btn_yes"))).click();
+        driver.quit();
     }
 }

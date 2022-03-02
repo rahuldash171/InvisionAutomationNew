@@ -44,22 +44,23 @@ public class HDAppiumTests {
     @Test(priority = 0)
     public void logIntoAppAsHomeDeliveryTech() throws InterruptedException, MalformedURLException {
         commonTests.signIntoINVision(wait, driver, "DEN",hdPersona,hdUser);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         /* ---Delay Routes popup code --*/
             try
             {
-                driver.findElementById(packageName + ":id/popup_element").isDisplayed();
+               if(driver.findElementById(packageName+":id/popup_element").isDisplayed())
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                        packageName + ":id/btn_back"))).click();
+                        packageName+":id/btn_back"))).click();
+               else
+               {
+                   System.out.println("No Routes available");
+               }
+
             }   // try
             catch (Exception e)
             {
-                System.out.println("No Routes available");
+                System.out.println("Exception "+e);
             }   // catch
-
-
-
-
-
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_delivery_persona_label"))).getText();
         Assert.assertTrue(hdLabel.equals("Home Delivery"));
@@ -96,5 +97,6 @@ public class HDAppiumTests {
         Assert.assertTrue(logoutText.equals("SIGN OUT?"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/btn_yes"))).click();
+        driver.quit();
     }
 }

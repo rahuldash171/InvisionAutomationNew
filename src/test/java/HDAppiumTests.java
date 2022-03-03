@@ -30,7 +30,7 @@ public class HDAppiumTests {
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "ce011821cbf838ec0c");
+        caps.setCapability("deviceName", "SM-G996U1");
         caps.setCapability("platformName", "Android");
         caps.setCapability("appPackage", packageName);
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
@@ -43,23 +43,18 @@ public class HDAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsHomeDeliveryTech() throws InterruptedException, MalformedURLException {
-        commonTests.signIntoINVision(wait, driver, "DEN",hdPersona,hdUser);
+        commonTests.signIntoINVisionS21(wait, driver, "DEN",hdPersona,hdUser);
         /* ---Delay Routes popup code --*/
             try
             {
                 driver.findElementById(packageName + ":id/popup_element").isDisplayed();
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                         packageName + ":id/btn_back"))).click();
-            }   // try
+            }
             catch (Exception e)
             {
                 System.out.println("No Routes available");
-            }   // catch
-
-
-
-
-
+            }
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_delivery_persona_label"))).getText();
         Assert.assertTrue(hdLabel.equals("Home Delivery"));
@@ -87,7 +82,8 @@ public class HDAppiumTests {
      */
     @AfterTest
     public void logOut() throws InterruptedException, MalformedURLException {
-
+        if (!invisionLoaded)
+            commonTests.signIntoINVisionS21(wait, driver, "SJC",hdPersona,hdUser);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/action_home"))).click();

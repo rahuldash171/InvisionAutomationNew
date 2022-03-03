@@ -14,8 +14,10 @@ public class InventoryAudit_WH {
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver , String packageName) {
 
         String scrollElement = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"Inventory Audit\").instance(0))";
-        driver.findElementByAndroidUIAutomator(scrollElement).click();
+        driver.findElementByAndroidUIAutomator(scrollElement);
+        driver.findElement(By.id(packageName+":id/cycle_count_btn")).click();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
         String recoveryTab = driver.findElementById(packageName+":id/txt_cycle").getText();
         Assert.assertTrue(recoveryTab.equals("Held for Recovery"));
         String adcTab = driver.findElementById(packageName+":id/txt_ship").getText();
@@ -27,8 +29,11 @@ public class InventoryAudit_WH {
         Assert.assertTrue(headerTab.equals("Inventory Audit"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/action_home"))).click();
+
         String scrollElement1 = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"Inventory Audit\").instance(0))";
-        driver.findElementByAndroidUIAutomator(scrollElement1).click();
+        driver.findElementByAndroidUIAutomator(scrollElement);
+        driver.findElement(By.id(packageName+":id/cycle_count_btn")).click();
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/txt_ship"))).click();
         String headADC = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(

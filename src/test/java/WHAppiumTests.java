@@ -28,7 +28,7 @@ public class WHAppiumTests {
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "ce011821cbf838ec0c");
+        caps.setCapability("deviceName", "SM-G996U1");
         caps.setCapability("platformName", "Android");
         caps.setCapability("appPackage", packageName);
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
@@ -41,7 +41,7 @@ public class WHAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsWarehouseTech() throws InterruptedException, MalformedURLException{
-        commonTests.signIntoINVision(wait,driver,"SJC",whPersona,whUser);
+        commonTests.signIntoINVisionS21(wait,driver,"SJC",whPersona,whUser);
         String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/warehouse_persona_label"))).getText();
         Assert.assertTrue(whLabel.equals("Warehousing"));
@@ -53,7 +53,7 @@ public class WHAppiumTests {
 
 //        new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
 //        new BoxSearch_WH().ClickNBack(wait, driver ,packageName);
-//        new ReceiveHD_WH().ClickNBack(wait, driver ,packageName);
+        new ReceiveHD_WH().ClickNBack(wait, driver ,packageName);
 //        new ReturnToADC_WH().ClickNBack(wait, driver, packageName);
 //        new InventoryCheck_WH().ClickNBack(wait, driver ,packageName);
 //        new Pick_WH().ClickNBack(wait, driver, packageName);

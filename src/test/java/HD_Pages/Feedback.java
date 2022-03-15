@@ -14,7 +14,7 @@ public class Feedback {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                 "//android.widget.ImageButton[@content-desc=\"Open navigation drawer\"]"))).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.TextView"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.TextView"))).click();
         String FeedbackHead= driver.findElementById(packageName+":id/feedback_header_txt").getText();
         System.out.println("Feedback tab header: "+FeedbackHead);
         Assert.assertTrue(FeedbackHead.equals("Feedback"));

@@ -56,7 +56,7 @@ public class KHAppiumTests {
 
     @Test(priority = 1)
     public void KHSanity() throws InterruptedException, MalformedURLException {
-        Thread.sleep(5000);
+//        Thread.sleep(5000);
         new ReceiveRecovery_KH().ClickNBack(wait, driver ,packageName);
         new Pick_KH().ClickNBack(wait, driver ,packageName);
         new InventoryAudit_KH().ClickNBack(wait, driver ,packageName);
@@ -67,7 +67,7 @@ public class KHAppiumTests {
         new History_KH().ClickNBack(wait, driver, packageName);
         new LoadTruckException_KH().ClickNBack(wait, driver, packageName);
         new MarketDashboard_KH().ClickNBack(wait, driver, packageName);
-       // new AllMarketReturnsQRCodes_KH().ClickNBack(wait, driver, packageName);
+//        new AllMarketReturnsQRCodes_KH().ClickNBack(wait, driver, packageName);
         new Feedback_KH().ClickNBack(wait, driver, packageName);
     }
 

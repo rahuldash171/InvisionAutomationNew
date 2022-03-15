@@ -42,6 +42,22 @@ public class WHAppiumTests {
     @Test(priority = 0)
     public void logIntoAppAsWarehouseTech() throws InterruptedException, MalformedURLException{
         commonTests.signIntoINVision(wait,driver,"SJC",whPersona,whUser);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        /*--Release Notes popup code */
+        try
+        {
+            if(driver.findElementById(packageName+":id/txt_whats_new").isDisplayed()) {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                        packageName + ":id/btn_next"))).click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                        packageName + ":id/btn_next"))).click();
+            }
+        }
+        catch (Exception p)
+        {
+            System.out.println("No Release Notes Available");
+        }
+
         String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/warehouse_persona_label"))).getText();
         Assert.assertTrue(whLabel.equals("Warehousing"));

@@ -44,21 +44,33 @@ public class HDAppiumTests {
     @Test(priority = 0)
     public void logIntoAppAsHomeDeliveryTech() throws InterruptedException, MalformedURLException {
         commonTests.signIntoINVision(wait, driver, "DEN",hdPersona,hdUser);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         /* ---Delay Routes popup code --*/
             try
             {
-                driver.findElementById(packageName + ":id/popup_element").isDisplayed();
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                        packageName + ":id/btn_back"))).click();
+               if(driver.findElementById(packageName+":id/popup_element").isDisplayed()) {
+                   wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                           packageName + ":id/btn_back"))).click();
+               }
             }   // try
             catch (Exception e)
             {
                 System.out.println("No Routes available");
             }   // catch
-
-
-
-
+        /*--Release Notes popup code */
+        try
+        {
+            if(driver.findElementById(packageName+":id/txt_whats_new").isDisplayed()) {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                        packageName + ":id/btn_next"))).click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                        packageName + ":id/btn_next"))).click();
+            }
+        }
+        catch (Exception p)
+        {
+            System.out.println("No Release Notes Available");
+        }
 
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_delivery_persona_label"))).getText();
@@ -96,5 +108,6 @@ public class HDAppiumTests {
         Assert.assertTrue(logoutText.equals("SIGN OUT?"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/btn_yes"))).click();
+        driver.quit();
     }
 }

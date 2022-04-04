@@ -12,8 +12,8 @@ public class Tutorial_WH {
     @author : Rahul Dash
      */
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver , String packageName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName+":id/tutorial_btn"))).click();
+        String scrollElement = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"Tutorial\").instance(0))";
+        driver.findElementByAndroidUIAutomator(scrollElement).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/action_home"))).click();

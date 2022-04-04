@@ -13,18 +13,23 @@ public class Returns {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_returns_img"))).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        WebElement rqPopup = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout");
-        Assert.assertTrue(rqPopup.isDisplayed());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/dialog_open_return_queue_no_button"))).click();
+        try {
+            WebElement rqPopup = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout");
+            Assert.assertTrue(rqPopup.isDisplayed());
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                    packageName + ":id/dialog_open_return_queue_no_button"))).click();
+        }catch (Exception e)
+        {
+            System.out.println("No return queue items are present");
+        }
         String returnHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup[1]/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.TextView[1]"))).getText();
         System.out.println("Returns header : " + returnHeader);
-        Assert.assertTrue(returnHeader.equals("Returns"));
+        Assert.assertEquals(returnHeader,"Returns");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/img_back"))).click();
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_delivery_persona_label"))).getText();
         //TODO - actually get this test to work
-        Assert.assertTrue(hdLabel.equals("Home Delivery"));
+        Assert.assertEquals(hdLabel,"Home Delivery");
     }
 }

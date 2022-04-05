@@ -13,8 +13,8 @@ public class InboundReceiptException_WH {
         @author : Rahul Dash
          */
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver , String packageName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName+":id/exception_btn"))).click();
+        String scrollElement = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"Inbound Receipt Exception\").instance(0))";
+        driver.findElementByAndroidUIAutomator(scrollElement).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebElement exceptionFAQ = driver.findElementById(packageName+":id/popup_element");
         Assert.assertTrue(exceptionFAQ.isDisplayed());

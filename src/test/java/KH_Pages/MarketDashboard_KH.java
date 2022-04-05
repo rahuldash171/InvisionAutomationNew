@@ -19,14 +19,14 @@ public class MarketDashboard_KH {
         //checking Market header
         String marketHeader= driver.findElementById(packageName + ":id/box_search_header_txt").getText();
         System.out.println("Market Dashboard Market header : "+marketHeader);
-        Assert.assertTrue(marketHeader.equals("Market"));
+        Assert.assertEquals(marketHeader,"Market");
         //checking Route header
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/route_txt_btn"))).click();
         String routeHeader= wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/box_search_header_txt"))).getText();
         System.out.println("Market Dashboard Route header : "+routeHeader);
-        Assert.assertTrue(routeHeader.equals("Route"));
+        Assert.assertEquals(routeHeader,"Route");
         //checking Box header
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/box_txt_btn"))).click();
@@ -35,14 +35,14 @@ public class MarketDashboard_KH {
         String boxHeader= wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/box_search_header_txt"))).getText();
         System.out.println("Market Dashboard Box header : "+boxHeader);
-        Assert.assertTrue(boxHeader.equals("Box"));
+        Assert.assertEquals(boxHeader,"Box");
         //checking User header
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/user_txt_btn"))).click();
         String userHeader= wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/box_search_header_txt"))).getText();
         System.out.println("Market Dashboard User header : "+userHeader);
-        Assert.assertTrue(userHeader.equals("User"));
+        Assert.assertEquals(userHeader,"User");
 
         //back to home page
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import java.util.concurrent.TimeUnit;
 
-public class FeedbackWH {
+public class Feedback_WH {
     /*@author -
     Rahul Dash*/
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver , String packageName) {

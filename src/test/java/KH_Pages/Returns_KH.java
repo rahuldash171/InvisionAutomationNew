@@ -16,20 +16,25 @@ public class Returns_KH {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_returns_btn"))).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        WebElement rqPopup = driver.findElementByXPath("\t\n" +
-                "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout");
-        Assert.assertTrue(rqPopup.isDisplayed());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/dialog_open_return_queue_no_button"))).click();
+        try {
+            WebElement rqPopup = driver.findElementByXPath("\t\n" +
+                    "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout");
+            Assert.assertTrue(rqPopup.isDisplayed());
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                    packageName + ":id/dialog_open_return_queue_no_button"))).click();
+        }catch(Exception e)
+        {
+            System.out.println("No return queue pop up is displayed.");
+        }
         String returnHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\t\n" +
                 "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.TextView"))).getText();
         System.out.println("Returns header : " + returnHeader);
-        Assert.assertTrue(returnHeader.equals("Returns"));
+        Assert.assertEquals(returnHeader,"Returns");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/img_back"))).click();
         String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_persona_label"))).getText();
         //TODO - actually get this test to work
-        Assert.assertTrue(khLabel.equals("Keyholder"));
+        Assert.assertEquals(khLabel,"Keyholder");
     }
 }

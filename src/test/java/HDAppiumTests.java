@@ -14,7 +14,9 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class HDAppiumTests {
-
+       /*
+        @author :Rahul Dash
+         */
     //declare needed constants
     private final String packageName = "com.sleepnumber.invision.stage";
     public AndroidDriver<MobileElement> driver;
@@ -44,29 +46,39 @@ public class HDAppiumTests {
     @Test(priority = 0)
     public void logIntoAppAsHomeDeliveryTech() throws InterruptedException, MalformedURLException {
         commonTests.signIntoINVision(wait, driver, "DEN",hdPersona,hdUser);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         /* ---Delay Routes popup code --*/
             try
             {
-                driver.findElementById(packageName + ":id/popup_element").isDisplayed();
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                        packageName + ":id/btn_back"))).click();
-            }   // try
+               if(driver.findElementById(packageName+":id/popup_element").isDisplayed()) {
+                   wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                           packageName + ":id/btn_back"))).click();
+               }
+            }
             catch (Exception e)
             {
                 System.out.println("No Routes available");
-            }   // catch
-
-
-
-
+            }
+        /*--Release Notes popup code */
+        try
+        {
+            while(driver.findElementById(packageName+":id/btn_next").isDisplayed()) {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                        packageName + ":id/btn_next"))).click();
+            }
+        }
+        catch (Exception p)
+        {
+            System.out.println("No Release Notes Available");
+        }
 
         String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/home_delivery_persona_label"))).getText();
-        Assert.assertTrue(hdLabel.equals("Home Delivery"));
+        Assert.assertEquals(hdLabel,"Home Delivery");
         invisionLoaded = true;
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1,enabled = true)
     public void HDSanity() {
 
         new LoadTruck().ClickNBack(wait, driver ,packageName);
@@ -82,6 +94,19 @@ public class HDAppiumTests {
         new Feedback().ClickNBack(wait, driver, packageName);
     }
 
+    @Test(priority = 2)
+    public void BoxSearchModule()
+    {
+
+        new BoxSearch().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
+        new BoxSearch().ManualEntryboxTest_RTID(wait,driver,packageName);
+        new BoxSearch().EmptyEntries(wait,driver,packageName);
+        new BoxSearch().InvalidEntries(wait,driver,packageName);
+        new BoxSearch().Flashbutton(wait,driver,packageName);
+        new BoxSearch().ScanGun(wait,driver,packageName);
+
+    }
+
     /**
      * Logging out of app
      */
@@ -93,8 +118,9 @@ public class HDAppiumTests {
                 packageName + ":id/action_home"))).click();
         String logoutText = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView").getText();
         System.out.println("Logout successful:"+ logoutText);
-        Assert.assertTrue(logoutText.equals("SIGN OUT?"));
+        Assert.assertEquals(logoutText,"SIGN OUT?");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/btn_yes"))).click();
+        driver.quit();
     }
 }

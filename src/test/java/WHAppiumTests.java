@@ -12,7 +12,9 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class WHAppiumTests {
-
+        /*
+        @author : Rahul Dash
+         */
     //declare needed constants
     private final String packageName = "com.sleepnumber.invision.stage";
     public AndroidDriver<MobileElement> driver;
@@ -42,6 +44,20 @@ public class WHAppiumTests {
     @Test(priority = 0)
     public void logIntoAppAsWarehouseTech() throws InterruptedException, MalformedURLException{
         commonTests.signIntoINVision(wait,driver,"SJC",whPersona,whUser);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        /*--Release Notes popup code */
+        try
+        {
+            while(driver.findElementById(packageName+":id/btn_next").isDisplayed()) {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                        packageName + ":id/btn_next"))).click();
+            }
+        }
+        catch (Exception p)
+        {
+            System.out.println("No Release Notes Available");
+        }
+
         String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/warehouse_persona_label"))).getText();
         Assert.assertTrue(whLabel.equals("Warehousing"));
@@ -51,18 +67,18 @@ public class WHAppiumTests {
     @Test(priority = 1)
     public void WHSanity() throws InterruptedException, MalformedURLException {
 
-//        new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
-//        new BoxSearch_WH().ClickNBack(wait, driver ,packageName);
-//        new ReceiveHD_WH().ClickNBack(wait, driver ,packageName);
-//        new ReturnToADC_WH().ClickNBack(wait, driver, packageName);
-//        new InventoryCheck_WH().ClickNBack(wait, driver ,packageName);
-//        new Pick_WH().ClickNBack(wait, driver, packageName);
-//        new History_WH().ClickNBack(wait, driver, packageName);
-//        new ReportDamage_WH().ClickNBack(wait, driver, packageName);
-//        new InboundReceiptException_WH().ClickNBack(wait, driver, packageName);
-//        new Tutorial_WH().ClickNBack(wait, driver, packageName);
+        new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
+        new BoxSearch_WH().ClickNBack(wait, driver ,packageName);
+        new ReceiveHD_WH().ClickNBack(wait, driver ,packageName);
+        new ReturnToADC_WH().ClickNBack(wait, driver, packageName);
+        new InventoryCheck_WH().ClickNBack(wait, driver ,packageName);
+        new Pick_WH().ClickNBack(wait, driver, packageName);
+        new History_WH().ClickNBack(wait, driver, packageName);
+        new ReportDamage_WH().ClickNBack(wait, driver, packageName);
+        new InboundReceiptException_WH().ClickNBack(wait, driver, packageName);
+        new Tutorial_WH().ClickNBack(wait, driver, packageName);
         new InventoryAudit_WH().ClickNBack(wait, driver, packageName);
-        new FeedbackWH().ClickNBack(wait, driver, packageName);
+        new Feedback_WH().ClickNBack(wait, driver, packageName);
     }
 
     /**
@@ -77,8 +93,9 @@ public class WHAppiumTests {
                 packageName+":id/action_home"))).click();
         String logoutText=driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView").getText();
         System.out.println(logoutText);
-        Assert.assertTrue(logoutText.equals("SIGN OUT?"));
+        Assert.assertEquals(logoutText,"SIGN OUT?");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/btn_yes"))).click();
+        driver.quit();
     }
 }

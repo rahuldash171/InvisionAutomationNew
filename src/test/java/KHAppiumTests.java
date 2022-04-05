@@ -54,9 +54,9 @@ public class KHAppiumTests {
         invisionLoaded = true;
     }
 
-    @Test(priority = 1)
-    public void KHSanity() throws InterruptedException, MalformedURLException {
-        Thread.sleep(5000);
+    @Test(priority = 1 , enabled = true)
+    public void KHSanity() throws InterruptedException, MalformedURLException
+    {
         new ReceiveRecovery_KH().ClickNBack(wait, driver ,packageName);
         new Pick_KH().ClickNBack(wait, driver ,packageName);
         new InventoryAudit_KH().ClickNBack(wait, driver ,packageName);
@@ -67,8 +67,19 @@ public class KHAppiumTests {
         new History_KH().ClickNBack(wait, driver, packageName);
         new LoadTruckException_KH().ClickNBack(wait, driver, packageName);
         new MarketDashboard_KH().ClickNBack(wait, driver, packageName);
-       // new AllMarketReturnsQRCodes_KH().ClickNBack(wait, driver, packageName);
+        new AllMarketReturnsQRCodes_KH().ClickNBack(wait, driver, packageName);
         new Feedback_KH().ClickNBack(wait, driver, packageName);
+    }
+
+    @Test(priority = 2)
+    public void BoxSearchModule()
+    {
+        new BoxSearch_KH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
+        new BoxSearch_KH().ManualEntryboxTest_RTID(wait,driver,packageName);
+        new BoxSearch_KH().EmptyEntries(wait,driver,packageName);
+        new BoxSearch_KH().InvalidEntries(wait,driver,packageName);
+        new BoxSearch_KH().Flashbutton(wait,driver,packageName);
+        new BoxSearch_KH().ScanGun(wait,driver,packageName);
     }
 
     /**
@@ -83,9 +94,10 @@ public class KHAppiumTests {
                 packageName + ":id/action_home"))).click();
         String logoutText = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView").getText();
         System.out.println(logoutText);
-        Assert.assertTrue(logoutText.equals("SIGN OUT?"));
+        Assert.assertEquals(logoutText,"SIGN OUT?");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/btn_yes"))).click();
+        driver.quit();
 
     }
 }

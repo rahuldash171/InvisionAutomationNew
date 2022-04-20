@@ -6,7 +6,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -64,7 +67,7 @@ public class WHAppiumTests {
         invisionLoaded = true;
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1 ,enabled = false)
     public void WHSanity() throws InterruptedException, MalformedURLException {
 
         new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
@@ -79,6 +82,17 @@ public class WHAppiumTests {
         new Tutorial_WH().ClickNBack(wait, driver, packageName);
         new InventoryAudit_WH().ClickNBack(wait, driver, packageName);
         new Feedback_WH().ClickNBack(wait, driver, packageName);
+    }
+
+    @Test(priority = 2,dependsOnMethods = "logIntoAppAsWarehouseTech")
+    public void InboundReceiptException()
+    {
+        new InboundReceiptException_WH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
+        new InboundReceiptException_WH().EmptyEntries(wait,driver,packageName);
+        new InboundReceiptException_WH().InvalidEntries(wait,driver,packageName);
+        new InboundReceiptException_WH().ScanGun(wait,driver,packageName);
+        new InboundReceiptException_WH().Flashbutton(wait,driver,packageName);
+        new InboundReceiptException_WH().FAQ(wait,driver,packageName);
     }
 
     /**

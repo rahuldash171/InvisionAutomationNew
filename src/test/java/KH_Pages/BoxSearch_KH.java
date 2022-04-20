@@ -29,7 +29,7 @@ public class BoxSearch_KH {
         String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_persona_label"))).getText();
         //TODO - actually get this test to work
-        Assert.assertTrue(khLabel.equals("Keyholder"));
+        Assert.assertTrue(khLabel.equals("Keyholder1"));
     }
 
     public void ManualEntryboxTest_OrderSKU(WebDriverWait wait, AndroidDriver driver, String packageName)

@@ -3,10 +3,10 @@
 <suite name="Sanity HD Test Suite" parallel="false" thread-count="1">
     <test verbose="2" preserve-order="true" name="HomeDelivery" >
         <classes>
-                <class name="HDAppiumTests"/>
+                <class name="HDAppiumTests" />
         </classes>
     </test>
-    <test verbose="2" preserve-order="true" name="WareHousing">
+    <test verbose="2" preserve-order="true" name="WareHousing" >
         <classes>
             <class name="WHAppiumTests"/>
         </classes>

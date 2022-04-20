@@ -54,7 +54,7 @@ public class KHAppiumTests {
         invisionLoaded = true;
     }
 
-    @Test(priority = 1 , enabled = true)
+    @Test(priority = 1 , enabled = false)
     public void KHSanity() throws InterruptedException, MalformedURLException
     {
         new ReceiveRecovery_KH().ClickNBack(wait, driver ,packageName);
@@ -71,7 +71,7 @@ public class KHAppiumTests {
         new Feedback_KH().ClickNBack(wait, driver, packageName);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2 , dependsOnMethods = "logIntoAppAsKHTech" ,enabled = false)
     public void BoxSearchModule()
     {
         new BoxSearch_KH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
@@ -80,6 +80,17 @@ public class KHAppiumTests {
         new BoxSearch_KH().InvalidEntries(wait,driver,packageName);
         new BoxSearch_KH().Flashbutton(wait,driver,packageName);
         new BoxSearch_KH().ScanGun(wait,driver,packageName);
+    }
+
+    @Test(priority = 3,dependsOnMethods = "logIntoAppAsKHTech")
+    public void LoadTruckException()
+    {
+        new LoadTruckException_KH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
+        new LoadTruckException_KH().EmptyEntries(wait,driver,packageName);
+        new LoadTruckException_KH().InvalidEntries(wait,driver,packageName);
+        new LoadTruckException_KH().ScanGun(wait,driver,packageName);
+        new LoadTruckException_KH().Flashbutton(wait,driver,packageName);
+        new LoadTruckException_KH().FAQ(wait,driver,packageName);
     }
 
     /**

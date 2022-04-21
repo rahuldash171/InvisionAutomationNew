@@ -34,7 +34,7 @@ public class KHAppiumTests {
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "ce011821cbf838ec0c");
+        caps.setCapability("deviceName", "SM-G996U1");
         caps.setCapability("platformName", "Android");
         caps.setCapability("appPackage", packageName);
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
@@ -47,7 +47,7 @@ public class KHAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsKHTech() throws InterruptedException, MalformedURLException {
-        commonTests.signIntoINVision(wait, driver, "PVD", khPersona,khUser);
+        commonTests.signIntoINVisionS21(wait, driver, "PVD", khPersona,khUser);
         String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_persona_label"))).getText();
         Assert.assertTrue(khLabel.equals("Keyholder"));

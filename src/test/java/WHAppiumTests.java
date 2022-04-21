@@ -12,7 +12,9 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class WHAppiumTests {
-
+        /*
+        @author : Rahul Dash
+         */
     //declare needed constants
     private final String packageName = "com.sleepnumber.invision.stage";
     public AndroidDriver<MobileElement> driver;
@@ -46,9 +48,7 @@ public class WHAppiumTests {
         /*--Release Notes popup code */
         try
         {
-            if(driver.findElementById(packageName+":id/txt_whats_new").isDisplayed()) {
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                        packageName + ":id/btn_next"))).click();
+            while(driver.findElementById(packageName+":id/btn_next").isDisplayed()) {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                         packageName + ":id/btn_next"))).click();
             }
@@ -79,7 +79,7 @@ public class WHAppiumTests {
         new InboundReceiptException_WH().ClickNBack(wait, driver, packageName);
         new Tutorial_WH().ClickNBack(wait, driver, packageName);
         new InventoryAudit_WH().ClickNBack(wait, driver, packageName);
-        new FeedbackWH().ClickNBack(wait, driver, packageName);
+        new Feedback_WH().ClickNBack(wait, driver, packageName);
     }
 
     @Test(priority = 2)

@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 public class LoadTruck {
     /*
-    @author : Rahul Dash, Nikita Gopathi
+    @author : Rahul Dash
      */
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver ,String packageName) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(

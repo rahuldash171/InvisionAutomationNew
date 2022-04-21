@@ -30,7 +30,7 @@ public class WHAppiumTests {
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "ce011821cbf838ec0c");
+        caps.setCapability("deviceName", "SM-G996U1");
         caps.setCapability("platformName", "Android");
         caps.setCapability("appPackage", packageName);
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
@@ -43,7 +43,7 @@ public class WHAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsWarehouseTech() throws InterruptedException, MalformedURLException{
-        commonTests.signIntoINVision(wait,driver,"SJC",whPersona,whUser);
+        commonTests.signIntoINVisionS21(wait,driver,"SJC",whPersona,whUser);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         /*--Release Notes popup code */
         try
@@ -64,7 +64,8 @@ public class WHAppiumTests {
         invisionLoaded = true;
     }
 
-    @Test(priority = 1)
+
+    @Test(priority = 1, enabled = false)
     public void WHSanity() throws InterruptedException, MalformedURLException {
 
         new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
@@ -79,6 +80,31 @@ public class WHAppiumTests {
         new Tutorial_WH().ClickNBack(wait, driver, packageName);
         new InventoryAudit_WH().ClickNBack(wait, driver, packageName);
         new Feedback_WH().ClickNBack(wait, driver, packageName);
+    }
+
+    @Test(priority = 2)
+    public void WHBoxSearch() throws InterruptedException, MalformedURLException {
+
+        new BoxSearch_WH().ClickNBack(wait, driver ,packageName);
+        new BoxSearch_WH().enterBSTile(wait, driver ,packageName);
+        new BoxSearch_WH().flashOnOff(wait, driver ,packageName);
+        new BoxSearch_WH().scanGunOnOff(wait, driver ,packageName);
+        //validating invalid and valid - Order and SKU
+        new BoxSearch_WH().manualEntry(wait, driver ,packageName);
+        new BoxSearch_WH().enterOrderSKU(wait, driver ,packageName,"84784777777","355426");
+        new BoxSearch_WH().validateEnterBarcodes(wait, driver ,packageName);
+
+        new BoxSearch_WH().enterOrderSKU(wait, driver ,packageName,"95013152741","122025");
+        new BoxSearch_WH().prodDetails(wait, driver ,packageName);
+
+        //validating invalid and valid - RTID
+        new BoxSearch_WH().manualEntry(wait, driver ,packageName);
+        new BoxSearch_WH().enterRTID(wait, driver ,packageName,"343298888");
+        new BoxSearch_WH().validateEnterBarcodes(wait, driver ,packageName);
+        new BoxSearch_WH().enterRTID(wait, driver ,packageName,"R88879750");
+        new BoxSearch_WH().prodDetails(wait, driver ,packageName);
+
+        new BoxSearch_WH().backToWHHome(wait, driver ,packageName);
     }
 
     /**

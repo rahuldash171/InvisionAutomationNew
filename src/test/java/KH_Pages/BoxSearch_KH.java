@@ -22,14 +22,14 @@ public class BoxSearch_KH {
         String boxSearchLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                 "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.TextView"))).getText();
         System.out.println("Box Search header : "+boxSearchLabel);
-        Assert.assertTrue(boxSearchLabel.equals("Box Search"));
+        Assert.assertEquals(boxSearchLabel,"Box Search");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/img_back"))).click();
         //TODO - PUT IN WHAT YOU ARE TRYING TO VALIDATE HERE
         String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_persona_label"))).getText();
         //TODO - actually get this test to work
-        Assert.assertTrue(khLabel.equals("Keyholder"));
+        Assert.assertEquals(khLabel,"Keyholder");
     }
 
     public void ManualEntryboxTest_OrderSKU(WebDriverWait wait, AndroidDriver driver, String packageName)

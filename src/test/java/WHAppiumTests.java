@@ -6,7 +6,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -30,11 +33,11 @@ public class WHAppiumTests {
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "SM-G996U1");
+        caps.setCapability("deviceName", "ce011821cbf838ec0c");
         caps.setCapability("platformName", "Android");
         caps.setCapability("appPackage", packageName);
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
-        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         wait = new WebDriverWait(driver, 30);
     }
 
@@ -43,7 +46,7 @@ public class WHAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsWarehouseTech() throws InterruptedException, MalformedURLException{
-        commonTests.signIntoINVisionS21(wait,driver,"SJC",whPersona,whUser);
+        commonTests.signIntoINVision(wait,driver,"SJC",whPersona,whUser);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         /*--Release Notes popup code */
         try
@@ -60,13 +63,12 @@ public class WHAppiumTests {
 
         String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/warehouse_persona_label"))).getText();
-        Assert.assertTrue(whLabel.equals("Warehousing"));
+        Assert.assertEquals(whLabel,"Warehousing");
         invisionLoaded = true;
     }
 
-
-    @Test(priority = 1, enabled = false)
-    public void WHSanity() throws InterruptedException, MalformedURLException {
+    @Test(priority = 1 ,enabled = true)
+    public void WHSanity() {
 
         new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
         new BoxSearch_WH().ClickNBack(wait, driver ,packageName);
@@ -82,29 +84,15 @@ public class WHAppiumTests {
         new Feedback_WH().ClickNBack(wait, driver, packageName);
     }
 
-    @Test(priority = 2)
-    public void WHBoxSearch() throws InterruptedException, MalformedURLException {
-
-        new BoxSearch_WH().ClickNBack(wait, driver ,packageName);
-        new BoxSearch_WH().enterBSTile(wait, driver ,packageName);
-        new BoxSearch_WH().flashOnOff(wait, driver ,packageName);
-        new BoxSearch_WH().scanGunOnOff(wait, driver ,packageName);
-        //validating invalid and valid - Order and SKU
-        new BoxSearch_WH().manualEntry(wait, driver ,packageName);
-        new BoxSearch_WH().enterOrderSKU(wait, driver ,packageName,"84784777777","355426");
-        new BoxSearch_WH().validateEnterBarcodes(wait, driver ,packageName);
-
-        new BoxSearch_WH().enterOrderSKU(wait, driver ,packageName,"95013152741","122025");
-        new BoxSearch_WH().prodDetails(wait, driver ,packageName);
-
-        //validating invalid and valid - RTID
-        new BoxSearch_WH().manualEntry(wait, driver ,packageName);
-        new BoxSearch_WH().enterRTID(wait, driver ,packageName,"343298888");
-        new BoxSearch_WH().validateEnterBarcodes(wait, driver ,packageName);
-        new BoxSearch_WH().enterRTID(wait, driver ,packageName,"R88879750");
-        new BoxSearch_WH().prodDetails(wait, driver ,packageName);
-
-        new BoxSearch_WH().backToWHHome(wait, driver ,packageName);
+    @Test(priority = 2,dependsOnMethods = "logIntoAppAsWarehouseTech")
+    public void InboundReceiptException()
+    {
+        new InboundReceiptException_WH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
+        new InboundReceiptException_WH().EmptyEntries(wait,driver,packageName);
+        new InboundReceiptException_WH().InvalidEntries(wait,driver,packageName);
+        new InboundReceiptException_WH().ScanGun(wait,driver,packageName);
+        new InboundReceiptException_WH().Flashbutton(wait,driver,packageName);
+        new InboundReceiptException_WH().FAQ(wait,driver,packageName);
     }
 
     /**

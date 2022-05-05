@@ -6,7 +6,7 @@
                 <class name="HDAppiumTests" />
         </classes>
     </test>
-    <test verbose="2" preserve-order="true" name="WareHousing">
+    <test verbose="2" preserve-order="true" name="WareHousing" >
         <classes>
             <class name="WHAppiumTests"/>
         </classes>

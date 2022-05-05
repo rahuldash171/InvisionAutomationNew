@@ -13,8 +13,8 @@ public class MarketDashboard_KH {
      */
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver, String packageName) {
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/keyholder_dashboard_btn"))).click();
+        String scrollElement = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"Market Dashboard\").instance(0))";
+        driver.findElementByAndroidUIAutomator(scrollElement).click();
         //String dateToday= driver.findElementById(packageName + ":id/dm_date_txt").getText();
         //checking Market header
         String marketHeader= driver.findElementById(packageName + ":id/box_search_header_txt").getText();
@@ -50,7 +50,7 @@ public class MarketDashboard_KH {
         String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_persona_label"))).getText();
         //TODO - actually get this test to work
-        Assert.assertTrue(khLabel.equals("Keyholder"));
+        Assert.assertEquals(khLabel,"Keyholder");
 
     }
 }

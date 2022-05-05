@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class KHAppiumTests {
     /*
-    @author : Nikita Gopathi
+    @author : Nikita Gopathi ,Rahul Dash
      */
 
     //declare needed constants
@@ -34,7 +34,7 @@ public class KHAppiumTests {
     public void setup() throws MalformedURLException {
         commonTests = new CommonTests();
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "SM-G996U1");
+        caps.setCapability("deviceName", "ce011821cbf838ec0c");
         caps.setCapability("platformName", "Android");
         caps.setCapability("appPackage", packageName);
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
@@ -47,15 +47,40 @@ public class KHAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsKHTech() throws InterruptedException, MalformedURLException {
-        commonTests.signIntoINVisionS21(wait, driver, "PVD", khPersona,khUser);
+        commonTests.signIntoINVision(wait, driver, "PVD", khPersona,khUser);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        /* ---Delay Routes popup code --*/
+        try
+        {
+            if(driver.findElementById(packageName+":id/popup_element").isDisplayed()) {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                        packageName + ":id/btn_back"))).click();
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("No Routes available");
+        }
+        /*--Release Notes popup code */
+        try
+        {
+            while(driver.findElementById(packageName+":id/btn_next").isDisplayed()) {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
+                        packageName + ":id/btn_next"))).click();
+            }
+        }
+        catch (Exception p)
+        {
+            System.out.println("No Release Notes Available");
+        }
         String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_persona_label"))).getText();
-        Assert.assertTrue(khLabel.equals("Keyholder"));
+        Assert.assertEquals(khLabel,"Keyholder");
         invisionLoaded = true;
     }
 
-    @Test(priority = 1 , enabled = true)
-    public void KHSanity() throws InterruptedException, MalformedURLException
+    @Test(priority = 1 , dependsOnMethods ="logIntoAppAsKHTech" )
+    public void KHSanity()
     {
         new ReceiveRecovery_KH().ClickNBack(wait, driver ,packageName);
         new Pick_KH().ClickNBack(wait, driver ,packageName);
@@ -71,7 +96,7 @@ public class KHAppiumTests {
         new Feedback_KH().ClickNBack(wait, driver, packageName);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2 , dependsOnMethods = "logIntoAppAsKHTech")
     public void BoxSearchModule()
     {
         new BoxSearch_KH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
@@ -80,6 +105,17 @@ public class KHAppiumTests {
         new BoxSearch_KH().InvalidEntries(wait,driver,packageName);
         new BoxSearch_KH().Flashbutton(wait,driver,packageName);
         new BoxSearch_KH().ScanGun(wait,driver,packageName);
+    }
+
+    @Test(priority = 3,dependsOnMethods = "logIntoAppAsKHTech")
+    public void LoadTruckException()
+    {
+        new LoadTruckException_KH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
+        new LoadTruckException_KH().EmptyEntries(wait,driver,packageName);
+        new LoadTruckException_KH().InvalidEntries(wait,driver,packageName);
+        new LoadTruckException_KH().ScanGun(wait,driver,packageName);
+        new LoadTruckException_KH().Flashbutton(wait,driver,packageName);
+        new LoadTruckException_KH().FAQ(wait,driver,packageName);
     }
 
     /**

@@ -43,7 +43,7 @@ public class HDAppiumTests {
     /**
      * Logging into Home Delivery persona and checking Persona label
      */
-    @Test(priority = 0)
+    @Test(priority = 0,description = "Login to HD tech")
     public void logIntoAppAsHomeDeliveryTech() throws InterruptedException, MalformedURLException {
         commonTests.signIntoINVision(wait, driver, "DEN",hdPersona,hdUser);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -78,7 +78,7 @@ public class HDAppiumTests {
         invisionLoaded = true;
     }
 
-    @Test(priority = 1,enabled = true)
+    @Test(priority = 1)
     public void HDSanity() {
 
         new LoadTruck().ClickNBack(wait, driver ,packageName);
@@ -94,7 +94,7 @@ public class HDAppiumTests {
         new Feedback().ClickNBack(wait, driver, packageName);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2,dependsOnMethods = "logIntoAppAsHomeDeliveryTech")
     public void BoxSearchModule()
     {
 
@@ -107,11 +107,22 @@ public class HDAppiumTests {
 
     }
 
+    @Test(priority = 3,dependsOnMethods = "logIntoAppAsHomeDeliveryTech")
+    public void LoadTruckException()
+    {
+        new LTException().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
+        new LTException().EmptyEntries(wait,driver,packageName);
+        new LTException().InvalidEntries(wait,driver,packageName);
+        new LTException().ScanGun(wait,driver,packageName);
+        new LTException().Flashbutton(wait,driver,packageName);
+        new LTException().FAQ(wait,driver,packageName);
+    }
+
     /**
      * Logging out of app
      */
     @AfterTest
-    public void logOut() throws InterruptedException, MalformedURLException {
+    public void logOut()  {
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(

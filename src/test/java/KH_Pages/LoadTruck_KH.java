@@ -15,15 +15,15 @@ public class LoadTruck_KH {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_load_truck_btn"))).click();
         String loadTruckLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.LinearLayout/android.widget.RelativeLayout[1]/android.widget.TextView"))).getText();
+                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.TextView"))).getText();
         System.out.println("Load Truck header : " + loadTruckLabel);
-        Assert.assertTrue(loadTruckLabel.equals("Download Manifest"));
+        Assert.assertEquals(loadTruckLabel,"Load Truck");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/action_home"))).click();
+                packageName + ":id/img_back"))).click();
         String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_persona_label"))).getText();
         //TODO - actually get this test to work
-        Assert.assertTrue(khLabel.equals("Keyholder"));
+        Assert.assertEquals(khLabel,"Keyholder");
 
     }
 }

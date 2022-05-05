@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
 import java.util.concurrent.TimeUnit;
 
 public class LoadTruckException_KH {
@@ -16,26 +17,24 @@ public class LoadTruckException_KH {
      */
 
     public void ClickNBack(WebDriverWait wait, AndroidDriver driver, String packageName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/keyholder_exception_btn"))).click();
+        new LoadTruckException_KH().commonActivities(wait,driver,packageName);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         String exceptionLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                 "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.TextView"))).getText();
         System.out.println("Load Truck Exception header : "+exceptionLabel);
-        Assert.assertTrue(exceptionLabel.equals("Load Truck Exception"));
+        Assert.assertEquals(exceptionLabel,"Load Truck Exception");
         String footerText=driver.findElementById(packageName + ":id/dept_img").getText();
-        Assert.assertTrue(footerText.equals("Route"));
+        Assert.assertEquals(footerText,"Route");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/action_home"))).click();
         String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/keyholder_persona_label"))).getText();
         //TODO - actually get this test to work
-        Assert.assertTrue(khLabel.equals("Keyholder"));
+        Assert.assertEquals(khLabel,"Keyholder");
     }
     public void ManualEntryboxTest_OrderSKU(WebDriverWait wait, AndroidDriver driver, String packageName)
     {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/keyholder_exception_btn"))).click();
+        new LoadTruckException_KH().commonActivities(wait,driver,packageName);
         System.out.println("Click on Manual Entry tab");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/ldk_problem_reading_barcode"))).click();
@@ -45,9 +44,9 @@ public class LoadTruckException_KH {
             System.out.println("Manual Entry box opened");
             System.out.println("Providing Order and SKU");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                    packageName + ":id/pw_input_orderNum"))).sendKeys("95012770501");
+                    packageName + ":id/pw_input_orderNum"))).sendKeys("95013298492");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                    packageName + ":id/pw_input_skuNum"))).sendKeys("124940");
+                    packageName + ":id/pw_input_skuNum"))).sendKeys("126088");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                     packageName + ":id/btn_theiaverify"))).click();
             try {
@@ -67,9 +66,9 @@ public class LoadTruckException_KH {
                 }
 
             } catch (Exception e) {
-                driver.findElement(By.id(packageName + ":id/rs_btnForceInvalidTransfer")).isDisplayed();
-                System.out.println("Invalid Order/Sku combination");
-                driver.findElement(By.id(packageName + ":id/rs_btnRescan")).click();
+                //driver.findElement(By.id(packageName + ":id/rs_btnForceInvalidTransfer")).isDisplayed();
+                System.out.println("valid Order/Sku combination");
+                //driver.findElement(By.id(packageName + ":id/rs_btnRescan")).click();
 
             }
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
@@ -81,8 +80,7 @@ public class LoadTruckException_KH {
     }
 
     public void FAQ(WebDriverWait wait, AndroidDriver driver, String packageName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/keyholder_exception_btn"))).click();
+        new LoadTruckException_KH().commonActivities(wait,driver,packageName);
         System.out.println("Click on FAQ button");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/ldk_tutorial_btn"))).click();
@@ -105,8 +103,7 @@ public class LoadTruckException_KH {
 
     public void EmptyEntries (WebDriverWait wait, AndroidDriver driver, String packageName)
     {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/keyholder_exception_btn"))).click();
+        new LoadTruckException_KH().commonActivities(wait,driver,packageName);
         System.out.println("Click on Manual Entry tab");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/ldk_problem_reading_barcode"))).click();
@@ -136,8 +133,7 @@ public class LoadTruckException_KH {
     public void Flashbutton (WebDriverWait wait, AndroidDriver driver, String packageName)
     {
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/keyholder_exception_btn"))).click();
+        new LoadTruckException_KH().commonActivities(wait,driver,packageName);
         System.out.println("Click on flash button");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/flash_toggle"))).click();
@@ -159,8 +155,7 @@ public class LoadTruckException_KH {
     public void ScanGun (WebDriverWait wait, AndroidDriver driver, String packageName)
     {
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/keyholder_exception_btn"))).click();
+        new LoadTruckException_KH().commonActivities(wait,driver,packageName);
         System.out.println("Click on ScanGun button");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/ldk_bluetooth_toggle"))).click();
@@ -178,8 +173,7 @@ public class LoadTruckException_KH {
     }
 
     public void InvalidEntries (WebDriverWait wait, AndroidDriver driver, String packageName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/keyholder_exception_btn"))).click();
+        new LoadTruckException_KH().commonActivities(wait,driver,packageName);
         System.out.println("Click on Manual Entry tab");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/ldk_problem_reading_barcode"))).click();
@@ -211,6 +205,14 @@ public class LoadTruckException_KH {
         } else {
             System.out.println("Manual Entry box didn't open");
         }
+    }
+
+    public void commonActivities(WebDriverWait wait, AndroidDriver driver, String packageNameSTAGE)
+    {
+        String scrollElement = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"Load Truck Exception\").instance(0))";
+        driver.findElementByAndroidUIAutomator(scrollElement).click();
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+
     }
 
 }

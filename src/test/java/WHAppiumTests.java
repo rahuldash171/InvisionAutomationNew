@@ -37,7 +37,7 @@ public class WHAppiumTests {
         caps.setCapability("platformName", "Android");
         caps.setCapability("appPackage", packageName);
         caps.setCapability("appActivity", "com.sleepnumber.invision.WelcomeActivity");
-        driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         wait = new WebDriverWait(driver, 30);
     }
 
@@ -63,12 +63,12 @@ public class WHAppiumTests {
 
         String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/warehouse_persona_label"))).getText();
-        Assert.assertTrue(whLabel.equals("Warehousing"));
+        Assert.assertEquals(whLabel,"Warehousing");
         invisionLoaded = true;
     }
 
-    @Test(priority = 1 ,enabled = false)
-    public void WHSanity() throws InterruptedException, MalformedURLException {
+    @Test(priority = 1 ,enabled = true)
+    public void WHSanity() {
 
         new InboundReceipts_WH().ClickNBack(wait, driver ,packageName);
         new BoxSearch_WH().ClickNBack(wait, driver ,packageName);

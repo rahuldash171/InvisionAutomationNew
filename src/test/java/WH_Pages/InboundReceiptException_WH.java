@@ -25,12 +25,12 @@ public class InboundReceiptException_WH {
                 packageName+":id/close_dialog_btn"))).click();
         String InboundexceptionHeader = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout[1]/android.widget.TextView").getText();
         System.out.println("Inbound exception header : "+InboundexceptionHeader);
-        Assert.assertTrue(InboundexceptionHeader.equals("Exception"));
+        Assert.assertEquals(InboundexceptionHeader,"Exception");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/action_home"))).click();
         String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/warehouse_persona_label"))).getText();
-        Assert.assertTrue(whLabel.equals("Warehousing"));
+        Assert.assertEquals(whLabel,"Warehousing");
     }
 
     public void ManualEntryboxTest_OrderSKU(WebDriverWait wait, AndroidDriver driver, String packageName)
@@ -47,9 +47,9 @@ public class InboundReceiptException_WH {
             System.out.println("Manual Entry box opened");
             System.out.println("Providing Order and SKU");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                    packageName + ":id/pw_input_orderNum"))).sendKeys("95013197429");
+                    packageName + ":id/pw_input_orderNum"))).sendKeys("95012993829");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                    packageName + ":id/pw_input_skuNum"))).sendKeys("125376");
+                    packageName + ":id/pw_input_skuNum"))).sendKeys("124353");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                     packageName + ":id/btn_theiaverify"))).click();
             try {
@@ -65,9 +65,9 @@ public class InboundReceiptException_WH {
                 }
 
             } catch (Exception e) {
-                driver.findElement(By.id(packageName + ":id/rs_btnForceInvalidTransfer")).isDisplayed();
-                System.out.println("Invalid Order/Sku combination");
-                driver.findElement(By.id(packageName + ":id/rs_btnRescan")).click();
+                //driver.findElement(By.id(packageName + ":id/rs_btnForceInvalidTransfer")).isDisplayed();
+                System.out.println("valid Order/Sku combination");
+                //driver.findElement(By.id(packageName + ":id/rs_btnRescan")).click();
 
             }
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(

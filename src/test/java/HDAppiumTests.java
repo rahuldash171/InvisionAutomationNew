@@ -78,7 +78,7 @@ public class HDAppiumTests {
         invisionLoaded = true;
     }
 
-    @Test(priority = 1,enabled = false)
+    @Test(priority = 1)
     public void HDSanity() {
 
         new LoadTruck().ClickNBack(wait, driver ,packageName);
@@ -94,7 +94,7 @@ public class HDAppiumTests {
         new Feedback().ClickNBack(wait, driver, packageName);
     }
 
-    @Test(priority = 2,dependsOnMethods = "logIntoAppAsHomeDeliveryTech", enabled = false)
+    @Test(priority = 2,dependsOnMethods = "logIntoAppAsHomeDeliveryTech")
     public void BoxSearchModule()
     {
 
@@ -122,7 +122,7 @@ public class HDAppiumTests {
      * Logging out of app
      */
     @AfterTest
-    public void logOut() throws InterruptedException, MalformedURLException {
+    public void logOut()  {
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(

@@ -82,6 +82,7 @@ public class Feedback_WH {
         System.out.println("Back on home page");
     }
 
+
     public void chooseDA(WebDriverWait wait, AndroidDriver driver , String packageName, String type){
         String curTypePath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.RelativeLayout/android.widget.Spinner/android.widget.TextView";
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(curTypePath))).click();

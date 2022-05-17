@@ -1,3 +1,4 @@
+import WH_Pages.Feedback_WH;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -45,7 +46,7 @@ public class HDAppiumTests {
      */
     @Test(priority = 0,description = "Login to HD tech")
     public void logIntoAppAsHomeDeliveryTech() throws InterruptedException, MalformedURLException {
-        commonTests.signIntoINVision(wait, driver, "DEN",hdPersona,hdUser);
+        commonTests.signIntoINVisionS21(wait, driver, "DEN",hdPersona,hdUser);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         /* ---Delay Routes popup code --*/
             try
@@ -72,13 +73,12 @@ public class HDAppiumTests {
             System.out.println("No Release Notes Available");
         }
 
-        String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/home_delivery_persona_label"))).getText();
-        Assert.assertEquals(hdLabel,"Home Delivery");
+        String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[2]"))).getText();
+        Assert.assertEquals(hdLabel.trim(),"Home Delivery");
         invisionLoaded = true;
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = true)
     public void HDSanity() {
 
         new LoadTruck().ClickNBack(wait, driver ,packageName);
@@ -94,7 +94,7 @@ public class HDAppiumTests {
         new Feedback().ClickNBack(wait, driver, packageName);
     }
 
-    @Test(priority = 2,dependsOnMethods = "logIntoAppAsHomeDeliveryTech")
+    @Test(priority = 2,dependsOnMethods = "logIntoAppAsHomeDeliveryTech", enabled = true)
     public void BoxSearchModule()
     {
 
@@ -107,7 +107,7 @@ public class HDAppiumTests {
 
     }
 
-    @Test(priority = 3,dependsOnMethods = "logIntoAppAsHomeDeliveryTech")
+    @Test(priority = 3,dependsOnMethods = "logIntoAppAsHomeDeliveryTech", enabled = true)
     public void LoadTruckException()
     {
         new LTException().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
@@ -116,6 +116,25 @@ public class HDAppiumTests {
         new LTException().ScanGun(wait,driver,packageName);
         new LTException().Flashbutton(wait,driver,packageName);
         new LTException().FAQ(wait,driver,packageName);
+    }
+
+    @Test(priority = 4,dependsOnMethods = "logIntoAppAsHomeDeliveryTech", enabled = true)
+    public void HDFeedback() throws InterruptedException, MalformedURLException {
+
+        new Feedback().ClickNBack(wait, driver, packageName);
+        new Feedback().NetworkConnectivityFeedback(wait, driver ,packageName);
+        new Feedback().DataAccuracyFeedback(wait, driver ,packageName);
+        new Feedback().AppExperienceFeedback(wait, driver ,packageName);
+        new Feedback().MobileDeviceFeedback(wait, driver ,packageName);
+        new Feedback().EmptyFeedback(wait, driver ,packageName);
+        new Feedback().backToHDHome(wait, driver ,packageName);
+
+    }
+
+    @Test(priority = 5, dependsOnMethods = "logIntoAppAsHomeDeliveryTech")
+    public void HDAllMarketReturnsQR() throws InterruptedException, MalformedURLException {
+        //new AllMarketQR().ClickNBack(wait, driver, packageName);
+        new AllMarketQR().openQRCode(wait, driver ,packageName);
     }
 
     /**
@@ -132,6 +151,7 @@ public class HDAppiumTests {
         Assert.assertEquals(logoutText,"SIGN OUT?");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/btn_yes"))).click();
+        System.out.println("User has been signed out");
         driver.quit();
     }
 }

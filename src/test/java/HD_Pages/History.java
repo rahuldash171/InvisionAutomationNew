@@ -17,10 +17,8 @@ public class History {
         Assert.assertTrue(historyLabel.equals("History"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/img_back"))).click();
-        String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/home_delivery_persona_label"))).getText();
-        //TODO - actually get this test to work
-        Assert.assertTrue(hdLabel.equals("Home Delivery"));
+        String hdLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[2]"))).getText();
+        Assert.assertTrue(hdLabel.trim().equals("Home Delivery"));
 
     }
 }

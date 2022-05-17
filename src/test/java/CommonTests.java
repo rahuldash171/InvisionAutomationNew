@@ -79,7 +79,6 @@ public class CommonTests {
         driver.findElementById(packageName+":id/input_locationName").sendKeys(marketLocation);
         driver.findElementById(packageName+":id/input_userID").sendKeys(user);
         driver.findElementById(packageName+":id/proceed_btn").click();
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(packageName+":id/proceed_btn"))).click();
         //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(packageName+":id/tv_header_title")));
     }
 

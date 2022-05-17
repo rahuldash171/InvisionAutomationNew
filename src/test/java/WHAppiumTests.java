@@ -46,7 +46,7 @@ public class WHAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsWarehouseTech() throws InterruptedException, MalformedURLException{
-        commonTests.signIntoINVision(wait,driver,"SJC",whPersona,whUser);
+        commonTests.signIntoINVisionS21(wait,driver,"SJC",whPersona,whUser);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         /*--Release Notes popup code */
         try

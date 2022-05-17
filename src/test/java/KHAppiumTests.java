@@ -81,7 +81,7 @@ public class KHAppiumTests {
         invisionLoaded = true;
     }
 
-    @Test(priority = 1 , dependsOnMethods ="logIntoAppAsKHTech", enabled = false)
+    @Test(priority = 1 , dependsOnMethods ="logIntoAppAsKHTech", enabled = true)
     public void KHSanity()
     {
         new ReceiveRecovery_KH().ClickNBack(wait, driver ,packageName);
@@ -98,7 +98,7 @@ public class KHAppiumTests {
         new Feedback_KH().ClickNBack(wait, driver, packageName);
     }
 
-    @Test(priority = 2 , dependsOnMethods = "logIntoAppAsKHTech", enabled = false)
+    @Test(priority = 2 , dependsOnMethods = "logIntoAppAsKHTech", enabled = true)
     public void BoxSearchModule()
     {
         new BoxSearch_KH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
@@ -109,7 +109,7 @@ public class KHAppiumTests {
         new BoxSearch_KH().ScanGun(wait,driver,packageName);
     }
 
-    @Test(priority = 3,dependsOnMethods = "logIntoAppAsKHTech", enabled = false)
+    @Test(priority = 3,dependsOnMethods = "logIntoAppAsKHTech", enabled = true)
     public void LoadTruckException()
     {
         new LoadTruckException_KH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
@@ -120,7 +120,7 @@ public class KHAppiumTests {
         new LoadTruckException_KH().FAQ(wait,driver,packageName);
     }
 
-    @Test(priority = 4, enabled = false)
+    @Test(priority = 4, enabled = true)
     public void KHFeedback() throws InterruptedException, MalformedURLException {
 
         new Feedback_KH().ClickNBack(wait, driver ,packageName);

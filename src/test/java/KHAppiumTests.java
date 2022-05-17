@@ -1,4 +1,6 @@
+import HD_Pages.AllMarketQR;
 import KH_Pages.*;
+import WH_Pages.Feedback_WH;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -47,7 +49,7 @@ public class KHAppiumTests {
      */
     @Test(priority = 0)
     public void logIntoAppAsKHTech() throws InterruptedException, MalformedURLException {
-        commonTests.signIntoINVision(wait, driver, "PVD", khPersona,khUser);
+        commonTests.signIntoINVisionS21(wait, driver, "PVD", khPersona,khUser);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         /* ---Delay Routes popup code --*/
         try
@@ -73,13 +75,13 @@ public class KHAppiumTests {
         {
             System.out.println("No Release Notes Available");
         }
-        String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/keyholder_persona_label"))).getText();
-        Assert.assertEquals(khLabel,"Keyholder");
+        String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\t\n" +
+                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[2]"))).getText();
+        Assert.assertEquals(khLabel.trim(),"Key Holder");
         invisionLoaded = true;
     }
 
-    @Test(priority = 1 , dependsOnMethods ="logIntoAppAsKHTech" )
+    @Test(priority = 1 , dependsOnMethods ="logIntoAppAsKHTech", enabled = true)
     public void KHSanity()
     {
         new ReceiveRecovery_KH().ClickNBack(wait, driver ,packageName);
@@ -96,7 +98,7 @@ public class KHAppiumTests {
         new Feedback_KH().ClickNBack(wait, driver, packageName);
     }
 
-    @Test(priority = 2 , dependsOnMethods = "logIntoAppAsKHTech")
+    @Test(priority = 2 , dependsOnMethods = "logIntoAppAsKHTech", enabled = true)
     public void BoxSearchModule()
     {
         new BoxSearch_KH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
@@ -107,7 +109,7 @@ public class KHAppiumTests {
         new BoxSearch_KH().ScanGun(wait,driver,packageName);
     }
 
-    @Test(priority = 3,dependsOnMethods = "logIntoAppAsKHTech")
+    @Test(priority = 3,dependsOnMethods = "logIntoAppAsKHTech", enabled = true)
     public void LoadTruckException()
     {
         new LoadTruckException_KH().ManualEntryboxTest_OrderSKU(wait,driver,packageName);
@@ -116,6 +118,25 @@ public class KHAppiumTests {
         new LoadTruckException_KH().ScanGun(wait,driver,packageName);
         new LoadTruckException_KH().Flashbutton(wait,driver,packageName);
         new LoadTruckException_KH().FAQ(wait,driver,packageName);
+    }
+
+    @Test(priority = 4, enabled = true)
+    public void KHFeedback() throws InterruptedException, MalformedURLException {
+
+        new Feedback_KH().ClickNBack(wait, driver ,packageName);
+        new Feedback_KH().NetworkConnectivityFeedback(wait, driver ,packageName);
+        new Feedback_KH().DataAccuracyFeedback(wait, driver ,packageName);
+        new Feedback_KH().AppExperienceFeedback(wait, driver ,packageName);
+        new Feedback_KH().MobileDeviceFeedback(wait, driver ,packageName);
+        new Feedback_KH().EmptyFeedback(wait, driver ,packageName);
+        new Feedback_KH().backToKHHome(wait, driver ,packageName);
+
+    }
+
+    @Test(priority = 5)
+    public void KHAllMarketReturnsQR() throws InterruptedException, MalformedURLException {
+        new AllMarketReturnsQRCodes_KH().ClickNBack(wait, driver, packageName);
+        new AllMarketReturnsQRCodes_KH().openQRCode(wait, driver ,packageName);
     }
 
     /**
@@ -133,6 +154,7 @@ public class KHAppiumTests {
         Assert.assertEquals(logoutText,"SIGN OUT?");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/btn_yes"))).click();
+        System.out.println("User has been signed out");
         driver.quit();
 
     }

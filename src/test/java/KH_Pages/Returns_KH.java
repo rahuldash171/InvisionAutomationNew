@@ -32,9 +32,7 @@ public class Returns_KH {
         Assert.assertEquals(returnHeader,"Returns");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName + ":id/img_back"))).click();
-        String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName + ":id/keyholder_persona_label"))).getText();
-        //TODO - actually get this test to work
-        Assert.assertEquals(khLabel,"Keyholder");
+        String khLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[2]"))).getText();
+        Assert.assertTrue(khLabel.trim().equals("Key Holder"));
     }
 }

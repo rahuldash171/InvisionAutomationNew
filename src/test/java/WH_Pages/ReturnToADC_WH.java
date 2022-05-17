@@ -25,9 +25,9 @@ public class ReturnToADC_WH {
         Assert.assertTrue(footerText.equals("Returns Lane"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
                 packageName+":id/img_back"))).click();
-        String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(
-                packageName+":id/warehouse_persona_label"))).getText();
-        Assert.assertTrue(whLabel.equals("Warehousing"));
+        String whLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[2]"))).getText();
+        Assert.assertTrue(whLabel.trim().equals("Warehouse"));
 
 
     }
